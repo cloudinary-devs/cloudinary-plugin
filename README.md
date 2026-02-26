@@ -1,34 +1,29 @@
-# Cursor plugin template
+# Cloudinary Plugin for Cursor
 
-Build and publish Cursor Marketplace plugins from a single repo.
+A Cursor plugin that brings Cloudinary's media management capabilities directly into your coding workflow. It connects your AI coding agent to Cloudinary's MCP servers and provides a documentation skill so you can get accurate, up-to-date answers about Cloudinary APIs without leaving your editor.
 
-Two starter plugins are included:
+## What's Included
 
-- **starter-simple**: rules and skills only
-- **starter-advanced**: rules, skills, agents, commands, hooks, MCP, and scripts
+### MCP Servers (`mcp.json`)
 
-## Getting started
+Five Cloudinary MCP servers are pre-configured:
 
-[Use this template](https://github.com/cursor/plugin-template/generate) to create a new repository, then customize:
+| Server | Description |
+|---|---|
+| `cloudinary-asset-mgmt` | Upload, manage, and transform media assets |
+| `cloudinary-env-config` | Configure your Cloudinary environment settings |
+| `cloudinary-smd` | Work with structured metadata on assets |
+| `cloudinary-analysis` | Analyze images and videos with AI |
+| `cloudinary-mediaflows` | Build and run automated media workflows |
 
-1. `.cursor-plugin/marketplace.json`: set marketplace `name`, `owner`, and `metadata`.
-2. `plugins/*/.cursor-plugin/plugin.json`: set `name` (lowercase kebab-case), `displayName`, `author`, `description`, `keywords`, `license`, and `version`.
-3. Replace placeholder rules, skills, agents, commands, hooks, scripts, and logos.
+> **Note:** The `cloudinary-mediaflows` server requires your Cloudinary credentials (`cloud_name`, `api_key`, `api_secret`) to be set in the headers.
 
-To add more plugins, see `docs/add-a-plugin.md`.
+### Skills (`skills/cloudinary-docs/`)
 
-## Single plugin vs multi-plugin
+The **cloudinary-docs** skill teaches the agent how to answer Cloudinary questions by fetching live documentation directly from `cloudinary.com/documentation/llms.txt`. This ensures answers are accurate and include real code examples, rather than relying on potentially outdated training data.
 
-This template defaults to **multi-plugin** (multiple plugins in one repo).
+## Getting Started
 
-For a **single plugin**, move your plugin folder contents to the repository root, keep one `.cursor-plugin/plugin.json`, and remove `.cursor-plugin/marketplace.json`.
-
-## Submission checklist
-
-- Each plugin has a valid `.cursor-plugin/plugin.json`.
-- Plugin names are unique, lowercase, and kebab-case.
-- `.cursor-plugin/marketplace.json` entries map to real plugin folders.
-- All frontmatter metadata is present in rule, skill, agent, and command files.
-- Logos are committed and referenced with relative paths.
-- `node scripts/validate-template.mjs` passes.
-- Repository link is ready for submission to the Cursor team (Slack or `kniparko@anysphere.com`).
+1. Install this plugin in Cursor.
+2. Add your Cloudinary credentials to the `cloudinary-mediaflows` server headers in `mcp.json`.
+3. Ask your agent anything about Cloudinary — uploads, transformations, metadata, analysis, and more.
