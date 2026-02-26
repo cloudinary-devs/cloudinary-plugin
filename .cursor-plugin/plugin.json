@@ -2,13 +2,13 @@
   "name": "cloudinary-plugin",
   "displayName": "Cloudinary",
   "version": "1.0.0",
-  "description": "Cloudinary plugin for coding agents",
+  "description": "Cloudinary plugin for Cursor — build media-rich apps with AI-powered image and video APIs, transformations, and asset management.",
   "author": {
     "name": "Cloudinary",
     "email": "support@cloudinary.com"
   },
   "license": "MIT",
-  "keywords": ["cursor", "plugin", "skills", "mcp"],
+  "keywords": ["cursor", "plugin", "skills", "mcp", "images", "videos", "transformations", "asset management"],
   "logo": "assets/logo.svg",
   "repository": "https://github.com/cloudinary-devs/cloudinary-plugin"
 }
