@@ -29,6 +29,26 @@ Two skills are included to give the agent deep Cloudinary knowledge:
 
 ## Getting Started
 
-1. Install this plugin in Cursor/Claude Code.
-2. On first use, approve the OAuth login prompt for the MCP servers. For `cloudinary-mediaflows`, add your credentials to its headers in `mcp.json`.
-3. Ask your agent anything about Cloudinary — uploads, transformations, metadata, analysis, and more. The agent will automatically use the right skill and MCP server for the job.
+### Cursor
+
+1. Copy the contents of `mcp.json` into your project's `.cursor/mcp.json` (create the file if it doesn't exist).
+2. Copy the `skills/` directory into your project root.
+3. In `.cursor/rules/`, create one rule file per skill — each pointing to its `SKILL.md`. Cursor will use the rule description to decide when to invoke the skill.
+4. For `cloudinary-mediaflows`, replace `YOUR_CLOUD_NAME`, `YOUR_API_KEY`, and `YOUR_API_SECRET` in `mcp.json` with your Cloudinary credentials (found in the [Cloudinary Console](https://console.cloudinary.com/settings/api-keys)).
+5. On first use, approve the OAuth login prompt that Cursor shows for the other four MCP servers.
+
+### Claude Code
+
+1. Run: `claude --plugin-dir /path/to/cloudinary-plugin`
+2. For `cloudinary-mediaflows`, replace the credential placeholders in `mcp.json` before starting.
+3. On first use, complete the OAuth login for the other four MCP servers.
+
+Once installed, ask your agent anything about Cloudinary — uploads, transformations, metadata, analysis, and more. The agent will automatically use the right skill and MCP server for the job.
+
+### Example prompts
+
+- "Upload this image to my Cloudinary account and resize it to 800px wide: [URL]"
+- "Remove the background from my product photo and replace it with a white padded square at 1000x1000"
+- "Debug this Cloudinary URL — it's not cropping correctly: [URL]"
+- "How do I set up the Cloudinary Node.js SDK in my Express app?"
+- "List all images in my account uploaded in the last 7 days"

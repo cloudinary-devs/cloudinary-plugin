@@ -3,9 +3,9 @@ name: cloudinary-docs
 description: This skill is used to look up how to do something in Cloudinary using the Cloudinary LLMs.txt and the sanitized markdown files.
 ---
 
-# My Skill
+# Cloudinary Documentation Skill
 
-Helps developers to integrate Cloudinary into their applications by providing documentation and code examples retrieved directly from the optimized .md files in the Cloudinary documentation rather than having parse the HTML pages.
+Helps developers integrate Cloudinary into their applications by providing documentation and code examples retrieved directly from the optimized .md files in the Cloudinary documentation, rather than having to parse HTML pages.
 
 
 ## When to Use

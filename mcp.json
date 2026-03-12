@@ -15,9 +15,9 @@
     "cloudinary-mediaflows": {
       "url": "https://mediaflows.mcp.cloudinary.com/v2/mcp",
       "headers": {
-        "cld-cloud-name": "cloud_name",
-        "cld-api-key": "api_key",
-        "cld-secret": "api_secret"
+      "cld-cloud-name": "YOUR_CLOUD_NAME",
+      "cld-api-key": "YOUR_API_KEY",
+      "cld-secret": "YOUR_API_SECRET"
       }
     }
   }
