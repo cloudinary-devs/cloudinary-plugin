@@ -1,8 +1,8 @@
 {
-  "name": "cloudinary-plugin",
+  "name": "cloudinary",
   "displayName": "Cloudinary",
   "version": "1.0.0",
-  "description": "Cloudinary plugin for Cursor — build media-rich apps with AI-powered image and video APIs, transformations, and asset management.",
+  "description": "Use Cloudinary directly in Cursor. Manage assets, apply transformations, optimize media, and more through natural conversation.",
   "author": {
     "name": "Cloudinary",
     "email": "support@cloudinary.com"

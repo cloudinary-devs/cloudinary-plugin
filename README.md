@@ -1,6 +1,6 @@
-# Cloudinary Plugin for Cursor
+# Cloudinary Plugin
 
-A Cursor plugin that brings Cloudinary's media management capabilities directly into your coding workflow. It connects your AI coding agent to Cloudinary's MCP servers and provides a documentation skill so you can get accurate, up-to-date answers about Cloudinary APIs without leaving your editor.
+A coding agent plugin that brings Cloudinary's media management capabilities directly into your coding workflow. It connects your AI coding agent to Cloudinary's MCP servers and provides a documentation skill so you can get accurate, up-to-date answers about Cloudinary APIs without leaving your editor.
 
 ## What's Included
 
@@ -18,12 +18,17 @@ Five Cloudinary MCP servers are pre-configured:
 
 > **Note:** The `cloudinary-mediaflows` server requires your Cloudinary credentials (`cloud_name`, `api_key`, `api_secret`) to be set in the headers.
 
-### Skills (`skills/cloudinary-docs/`)
+### Skills
 
-The **cloudinary-docs** skill teaches the agent how to answer Cloudinary questions by fetching live documentation directly from `cloudinary.com/documentation/llms.txt`. This ensures answers are accurate and include real code examples, rather than relying on potentially outdated training data.
+Two skills are included to give the agent deep Cloudinary knowledge:
+
+| Skill | Directory | Description |
+|---|---|---|
+| **cloudinary-docs** | `skills/cloudinary-docs/` | Answers Cloudinary questions by fetching live documentation from `cloudinary.com/documentation/llms.txt`, ensuring accurate and up-to-date responses with real code examples. |
+| **cloudinary-transformations** | `skills/cloudinary-transformations/` | Creates and debugs Cloudinary transformation URLs from natural language. Covers resize/crop, generative AI effects, video transformations, overlays, named transformations, and cost optimization — with a built-in validation checklist and debugging guide. |
 
 ## Getting Started
 
-1. Install this plugin in Cursor.
+1. Install this plugin in Cursor/Claude Code.
 2. Add your Cloudinary credentials to the `cloudinary-mediaflows` server headers in `mcp.json`.
-3. Ask your agent anything about Cloudinary — uploads, transformations, metadata, analysis, and more.
+3. Ask your agent anything about Cloudinary — uploads, transformations, metadata, analysis, and more. The agent will automatically use the right skill and MCP server for the job.
