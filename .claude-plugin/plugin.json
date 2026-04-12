@@ -1,6 +1,6 @@
 {
   "name": "cloudinary",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Use Cloudinary directly in Claude. Manage assets, apply transformations, optimize media, and more through natural conversation.",
   "author": {
     "name": "Cloudinary",
