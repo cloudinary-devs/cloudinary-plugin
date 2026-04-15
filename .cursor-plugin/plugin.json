@@ -1,8 +1,8 @@
 {
   "name": "cloudinary",
   "displayName": "Cloudinary",
-  "version": "1.1.0",
-  "description": "Use Cloudinary directly in Cursor. Manage assets, apply transformations, optimize media, and more through natural conversation.",
+  "version": "1.1.1",
+  "description": "Use Cloudinary directly in Cursor. Upload, manage, optimize, and transform images and videos at scale using natural language.",
   "author": {
     "name": "Cloudinary",
     "email": "support@cloudinary.com"
