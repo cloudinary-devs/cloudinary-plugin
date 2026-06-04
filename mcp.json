@@ -10,7 +10,7 @@
       "url": "https://structured-metadata.mcp.cloudinary.com/mcp"
     },
     "cloudinary-analysis": {
-      "url": "https://analysis.mcp.cloudinary.com/mcp"
+      "url": "https://analysis.mcp.cloudinary.com/sse"
     },
     "cloudinary-mediaflows": {
       "url": "https://mediaflows.mcp.cloudinary.com/v2/mcp",
