@@ -93,7 +93,7 @@ Conditional transformation based on context variable.
 
 **Common metadata fields:**
 - `md:title`, `md:description`, `md:price`, `md:stock`, `md:date`
-- Must be set on asset via [structured metadata](https://cloudinary.com/documentation/structured_metadata.md)
+- Must be set on asset via [structured metadata](https://cloudinary.com/documentation/structured_metadata.md?install_source=plugin&referrer=trans-skill)
 
 ### Variable Scope and Order
 
@@ -479,7 +479,7 @@ Font size scales to 10% of image width.
 ### Conditional Overlay Based on Tags
 
 ```
-if_!watermark!_nin_tags/if_end/if_!premium!_in_tags/l_premium_badge/fl_layer_apply,g_north_east/if_end/f_auto/q_auto
+if_!watermark!_nin_tags/if_!premium!_in_tags/l_premium_badge/fl_layer_apply,g_north_east/if_end/if_end/f_auto/q_auto
 ```
 - Skip everything if "watermark" tag present
 - Add premium badge if "premium" tag present
@@ -602,7 +602,7 @@ Different seasonal icons based on context.
 ### Responsive Image Grid
 
 ```
-$cols_3,$gutter_20,$container_1200/c_fill,g_auto,w_$container_sub_$gutter_mul_$cols_add_1_div_$cols/if_ar_gt_1.0/ar_16:9/if_else/ar_1:1/if_end/f_auto/q_auto
+$cols_3,$gutter_20,$container_1200,$slots_$cols_add_1,$totalgutter_$slots_mul_$gutter,$avail_$container_sub_$totalgutter/c_fill,g_auto,w_$avail_div_$cols/if_ar_gt_1.0/c_fill,ar_16:9,w_$avail_div_$cols/if_else/c_fill,ar_1:1,w_$avail_div_$cols/if_end/f_auto/q_auto
 ```
 Calculates grid item width: (container - (gutter × (cols + 1))) ÷ cols
 
@@ -635,8 +635,8 @@ Watermark sized to 30% width × 10% height, positioned 30px from bottom-right.
 ```
 if_ar_gt_1.5/c_pad,ar_16:9,b_auto/if_else/if_ar_lt_0.67/c_pad,ar_9:16,b_auto/if_else/c_fit,w_800/if_end/if_end/f_auto/q_auto
 ```
-- Wide images: Pad to 16:9 with blur
-- Tall images: Pad to 9:16 with blur  
+- Wide images: Pad to 16:9 with automatically selected color
+- Tall images: Pad to 9:16 with automatically selected color
 - Normal: Fit to 800px
 
 ## Limitations and Gotchas
@@ -721,7 +721,7 @@ For named transformation details, see [named-transformations.md](named-transform
 
 ## Additional Resources
 
-- [Conditional Transformations](https://cloudinary.com/documentation/conditional_transformations.md) - Complete conditional syntax
-- [User-Defined Variables and Arithmetic](https://cloudinary.com/documentation/user_defined_variables.md) - Full variable reference
-- [Structured Metadata](https://cloudinary.com/documentation/structured_metadata.md) - Using metadata in conditionals
-- [Context Variables](https://cloudinary.com/documentation/user_defined_variables.md#context_variables) - Request-time variables
+- [Conditional Transformations](https://cloudinary.com/documentation/conditional_transformations.md?install_source=plugin&referrer=trans-skill) - Complete conditional syntax
+- [User-Defined Variables and Arithmetic](https://cloudinary.com/documentation/user_defined_variables.md?install_source=plugin&referrer=trans-skill) - Full variable reference
+- [Structured Metadata](https://cloudinary.com/documentation/structured_metadata.md?install_source=plugin&referrer=trans-skill) - Using metadata in conditionals
+- [Context Variables](https://cloudinary.com/documentation/user_defined_variables.md?install_source=plugin&referrer=trans-skill#context_variables) - Request-time variables
