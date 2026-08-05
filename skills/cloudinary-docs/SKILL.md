@@ -7,7 +7,7 @@ metadata:
   version: '1.1.0'
 ---
 
-# Cloudinary Documentation
+# Cloudinary Documentation Skill
 
 Helps developers integrate Cloudinary into their applications by providing documentation and code examples retrieved directly from the agent-optimized markdown files in the Cloudinary documentation.
 
