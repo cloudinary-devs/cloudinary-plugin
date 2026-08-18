@@ -20,12 +20,13 @@ Five Cloudinary MCP servers are pre-configured:
 
 ### Skills
 
-Two skills are included to give the agent deep Cloudinary knowledge:
+Three skills are included to give the agent deep Cloudinary knowledge:
 
 | Skill | Directory | Description |
 |---|---|---|
 | **cloudinary-docs** | `skills/cloudinary-docs/` | Answers Cloudinary questions by fetching live documentation from `cloudinary.com/documentation/llms.txt`, ensuring accurate and up-to-date responses with real code examples. |
 | **cloudinary-transformations** | `skills/cloudinary-transformations/` | Creates and debugs Cloudinary transformation URLs from natural language. Covers resize/crop, generative AI effects, video transformations, overlays, named transformations, and cost optimization — with a built-in validation checklist and debugging guide. |
+| **claimable-cloud** | `skills/claimable-cloud/` | Provisions a working Cloudinary cloud with a single command and no signup (a Claimable Cloud) when no credentials are available — claimable by email within 24 hours to keep as a permanent free account. |
 
 ## Getting Started
 
