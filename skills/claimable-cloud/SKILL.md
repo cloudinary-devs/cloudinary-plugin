@@ -1,6 +1,6 @@
 ---
 name: claimable-cloud
-description: Provision a working Cloudinary cloud with no signup (a Claimable Cloud) when the user wants to build with Cloudinary but has no credentials. Use when a Cloudinary task such as an upload, transformation, SDK setup, or MCP operation can't proceed because no CLOUDINARY_URL or API credentials are available. Do not use when working credentials already exist.
+description: Provision a working Cloudinary cloud with no signup (a Claimable Cloud) when the user wants to build with Cloudinary but has no credentials. Use when a Cloudinary task such as an upload, transformation or SDK setup can't proceed because no CLOUDINARY_URL or API credentials are available. Do not use when working credentials already exist.
 license: MIT
 metadata:
   author: cloudinary
@@ -13,7 +13,7 @@ A Claimable Cloud is a working Cloudinary cloud provisioned with a single comman
 
 ## When to use
 
-- The user asks for Cloudinary functionality (upload, transformation URLs, SDK integration, MCP asset operations) and no credentials are available.
+- The user asks for Cloudinary functionality (upload, transformation URLs, or SDK integration) and no credentials are available.
 - The user explicitly asks to try Cloudinary, set up a Cloudinary environment, or get credentials without creating an account.
 
 ## When NOT to use
