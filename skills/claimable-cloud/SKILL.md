@@ -35,7 +35,7 @@ A Claimable Cloud is a working Cloudinary cloud provisioned with a single comman
 
    Optional flags:
    - `--email <address>`: pre-fills the claim page (not verified at creation).
-   - `--ip <address>`: allows media delivery from additional machines (repeatable, up to three addresses). Use when the user views media somewhere other than this machine, such as a laptop viewing media served from a remote dev environment.
+   - `--ip <address>`: locks media delivery to the given address *instead of* this machine's detected public IP (repeatable, up to three addresses). Use when the user views media somewhere other than this machine, such as a laptop viewing media served from a remote dev environment. If this machine still needs delivery too, include its address as one of the three.
    - Never pass `--force`. If the command exits because `.env` already contains a `CLOUDINARY_URL`, that means credentials exist; use them.
 
 4. **After the command succeeds:**
@@ -45,9 +45,19 @@ A Claimable Cloud is a working Cloudinary cloud provisioned with a single comman
 
 5. **Tell the user, every time:**
    - The claim URL, and that the cloud expires in 24 hours unless they claim it: they enter their email at the claim URL and confirm from a verification email. Claiming keeps the same credentials.
-   - Until claimed, media delivery is locked to this machine's public IP address, plus any addresses passed with `--ip` (up to three). That's fine for local development; claiming removes the restriction.
+   - Until claimed, media delivery is locked to this machine's public IP address — or, if `--ip` was passed, to those addresses only (up to three). That's fine for local development; claiming removes the restriction.
 
 6. **Verify** by rendering a sample delivery URL from the new cloud, then continue the user's original task.
+
+## If provisioning fails
+
+Don't retry in a loop: failed attempts still count against rate limits. Retry at most once, and only after fixing the cause:
+
+- **429** (`ip_rate_limit_exceeded`, `global_rate_limit_exceeded`): rate limited. Don't retry; offer the standard [free signup](https://cloudinary.com/users/register_free?install_source=plugin&referrer=claimable-cloud-skill) instead.
+- **403** (`geo_location_not_permitted`): the network location isn't permitted — often a VPN exit node. Ask the user to disconnect the VPN, then retry once.
+- **400** (`delivery_ips_*`): fix the `--ip` values: public IPv4 or IPv6 addresses only, no CIDR ranges, at most three.
+
+If it still fails after one retry, stop and point the user to the standard free signup.
 
 ## Security
 

@@ -31,5 +31,5 @@ Three skills are included to give the agent deep Cloudinary knowledge:
 ## Getting Started
 
 1. Install this plugin in Cursor/Claude Code.
-2. On first use, approve the OAuth login prompt for the MCP servers. For `cloudinary-mediaflows`, add your credentials to its headers in `mcp.json`.
+2. On first use, approve the OAuth login prompt for the MCP servers. For `cloudinary-mediaflows`, add your credentials to its headers in `mcp.json`. No Cloudinary account yet? Just ask the agent to set one up — the **claimable-cloud** skill provisions a free working cloud with no signup (claim it by email within 24 hours to keep it).
 3. Ask your agent anything about Cloudinary — uploads, transformations, metadata, analysis, and more. The agent will automatically use the right skill and MCP server for the job.
