@@ -14,8 +14,8 @@
       "url": "https://structured-metadata.mcp.cloudinary.com/mcp"
     },
     "cloudinary-analysis": {
-      "type": "sse",
-      "url": "https://analysis.mcp.cloudinary.com/sse"
+      "type": "streamable-http",
+      "url": "https://analysis.mcp.cloudinary.com/mcp"
     },
     "cloudinary-mediaflows": {
       "type": "streamable-http",
