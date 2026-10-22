@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "cloudinary",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Use Cloudinary directly in your agent. Upload, manage, optimize, and transform images and videos at scale using natural language.",
   "author": {
     "name": "Cloudinary",
