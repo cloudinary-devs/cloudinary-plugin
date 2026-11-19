@@ -1,0 +1,40 @@
+name: Tag release
+# Tags v<version> and publishes a GitHub release whenever main carries a plugin
+# version that has no tag yet. The approval step is the PR that bumped the
+# version: nothing here runs before that PR is reviewed and merged.
+on:
+  push:
+    branches: [main]
+    paths: [plugin.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
+        with:
+          node-version: '22'
+      - name: Check the plugin is consistent
+        run: node scripts/sync-skills.mjs --check
+      - name: Tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p "require('./plugin.json').version")
+          tag="v$version"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "$tag is already released."
+            exit 0
+          fi
+          gh release create "$tag" --target "$GITHUB_SHA" --title "$tag" --generate-notes

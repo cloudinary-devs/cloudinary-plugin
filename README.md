@@ -33,3 +33,17 @@ Three skills are included to give the agent deep Cloudinary knowledge:
 1. Install this plugin in Cursor/Claude Code.
 2. On first use, approve the OAuth login prompt for the MCP servers. For `cloudinary-mediaflows`, add your credentials to its headers in `mcp.json`. No Cloudinary account yet? Just ask the agent to set one up — the **claimable-cloud** skill provisions a free working cloud with no signup (claim it by email within 24 hours to keep it).
 3. Ask your agent anything about Cloudinary — uploads, transformations, metadata, analysis, and more. The agent will automatically use the right skill and MCP server for the job.
+
+## Updating skills
+
+Most skills here are copies of the ones in [cloudinary-devs/skills](https://github.com/cloudinary-devs/skills). `skills.lock.json` lists them, with the version, commit, and tree each one was copied from. Never edit a synced skill in this repo: change it in the skills repo, and the sync brings it here.
+
+The [Sync skills workflow](.github/workflows/sync-skills.yml) checks the skills repo's `main` twice a day on weekdays, and opens a PR here with the updated skills, lock file, and plugin version when a synced skill changed. You can also start it from the Actions tab. To run the sync locally:
+
+```bash
+node scripts/sync-skills.mjs --ref main
+```
+
+The script rewrites `install_source=skillspack` to `install_source=plugin`, and turns each skill's version-check block into the plugin one, which tells users to update the plugin rather than run `npx skills`. To start syncing another skill, add an entry for it to `skills.lock.json` with `"source": "skills-repo"` and an empty `version`, then run the script. Skills with `"source": "plugin-local"` live only in this repo.
+
+CI runs `node scripts/sync-skills.mjs --check` on every PR. The checks don't start by themselves on a PR the sync workflow opened, so the workflow runs the same check before opening it. Close and reopen the PR to run them there. It fails if the three manifests disagree on the version, a synced skill differs from its source commit, or skills change without a plugin version bump. Merging a version bump to `main` tags the release as `v<version>`.
