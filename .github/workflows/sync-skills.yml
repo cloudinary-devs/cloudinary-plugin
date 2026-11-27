@@ -1,0 +1,97 @@
+name: Sync skills
+# Opens a PR that brings the skills this plugin ships up to date with
+# cloudinary-devs/skills, using scripts/sync-skills.mjs (skills, lock file,
+# and plugin version bump). The PR is the approval step: nothing reaches main,
+# and no release is tagged, until someone reviews and merges it.
+#
+# Runs twice a day on weekdays, or manually. It does nothing when the lock file
+# already records the target commit, or when no synced skill changed.
+#
+# The PR uses a fixed branch that is overwritten whenever the skills change
+# again, so there's at most one open sync PR.
+#
+# Setup: "Allow GitHub Actions to create and approve pull requests" must be on
+# in this repo's Actions settings.
+on:
+  schedule:
+    # 07:17 and 13:17 UTC, Monday to Friday.
+    - cron: "17 7,13 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Skills commit or branch to sync to
+        default: main
+      bump:
+        description: Plugin version bump
+        type: choice
+        default: auto
+        options: [auto, patch, minor, major]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-skills
+  cancel-in-progress: false
+
+env:
+  BRANCH: automation/skills-sync
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e  # v6.4.0
+        with:
+          node-version: '22'
+      - name: Sync
+        id: sync
+        env:
+          REF: ${{ inputs.ref || 'main' }}
+          BUMP: ${{ inputs.bump || 'auto' }}
+        run: |
+          node scripts/sync-skills.mjs --ref "$REF" --bump "$BUMP" --summary "$RUNNER_TEMP/body.md"
+          cat "$RUNNER_TEMP/body.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Check the result
+        if: steps.sync.outputs.changed == 'true'
+        # A PR opened by this workflow doesn't start the PR checks, so run them here.
+        run: node scripts/sync-skills.mjs --check --base HEAD
+      - name: Open or update the PR
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.sync.outputs.version }}
+        run: |
+          title="Sync skills and bump plugin to v${VERSION}"
+          {
+            echo
+            echo "Opened by the [Sync skills workflow](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}), which ran \`scripts/sync-skills.mjs --check\` on this content. The PR checks don't start by themselves on a PR opened by a workflow: close and reopen the PR to run them here."
+            echo
+            echo "The \`${BRANCH}\` branch is overwritten whenever the skills change again, so don't push other commits to it."
+            echo
+            echo "Merging this tags the plugin as \`v${VERSION}\`. It's released together with the matching update to the skills index on cloudinary.com."
+          } >> "$RUNNER_TEMP/body.md"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --quiet -B "$BRANCH"
+          git add --all
+          git commit --quiet --message "$title"
+
+          # Leave the branch and the PR description alone when nothing changed since the last run.
+          pushed=false
+          if git fetch --quiet origin "refs/heads/$BRANCH" 2>/dev/null && git diff --quiet FETCH_HEAD HEAD; then
+            echo "$BRANCH already holds this content."
+          else
+            git push --quiet --force origin "HEAD:refs/heads/$BRANCH"
+            pushed=true
+          fi
+
+          number=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          if [ -z "$number" ]; then
+            gh pr create --base main --head "$BRANCH" --title "$title" --body-file "$RUNNER_TEMP/body.md"
+          elif [ "$pushed" = true ]; then
+            gh pr edit "$number" --title "$title" --body-file "$RUNNER_TEMP/body.md"
+          fi
